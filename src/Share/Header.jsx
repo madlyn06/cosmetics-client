@@ -277,7 +277,7 @@ function Header(props) {
             <div className="col-lg-3">
               <div className="logo pb-sm-30 pb-xs-30">
                 <Link to="/">
-                  <img src={logo} style={{ width: "13rem" }} />
+                  <img src={logo} style={{ width: "9rem" }} />
                 </Link>
               </div>
             </div>
