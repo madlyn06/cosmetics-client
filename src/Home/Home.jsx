@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { useEffect, useState } from "react";
 import Home_Category from "./Component/Home_Category";
 import Home_Product from "./Component/Home_Product";
@@ -139,15 +140,15 @@ function Home(props) {
 
       <Home_Product
         gender={`Male`}
-        category={"60615da34c9cac0448b4b9a2"}
+        category={"all"}
         GET_id_modal={GET_id_modal}
       />
 
-      <Home_Product
+      {/* <Home_Product
         gender={`Female`}
         category={"60615da34c9cac0448b4b9a8"}
         GET_id_modal={GET_id_modal}
-      />
+      /> */}
 
       <div className="modal fade modal-wrapper" id={id_modal}>
         <div className="modal-dialog modal-dialog-centered" role="document">
