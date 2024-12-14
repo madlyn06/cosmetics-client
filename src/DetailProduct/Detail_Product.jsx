@@ -268,27 +268,8 @@ function Detail_Product(props) {
                   </div>
                   <div className="product-desc">
                     <p>
-                      <span>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Vel harum tenetur delectus nam quam assumenda? Soluta
-                        vitae tempora ratione excepturi doloremque, repudiandae
-                        ullam, eum corporis, itaque dolor aperiam enim
-                        aspernatur.
-                      </span>
+                      <span>{product?.describe}</span>
                     </p>
-                  </div>
-                  <div className="product-variants">
-                    <div className="produt-variants-size">
-                      <label>Size</label>
-                      <select
-                        className="nice-select"
-                        onChange={(e) => set_size(e.target.value)}
-                      >
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                      </select>
-                    </div>
                   </div>
                   <div className="single-add-to-cart">
                     <form action="#" className="cart-quantity">
@@ -353,12 +334,7 @@ function Detail_Product(props) {
               role="tabpanel"
             >
               <div className="product-description">
-                <span>
-                  The best is yet to come! Give your walls a voice with a framed
-                  poster. This aesthethic, optimistic poster will look great in
-                  your desk or in an open-space office. Painted wooden frame
-                  with passe-partout for more depth.
-                </span>
+                <span>{product?.describe}</span>
               </div>
             </div>
             <div id="reviews" className="tab-pane" role="tabpanel">
@@ -451,18 +427,10 @@ function Detail_Product(props) {
                                 />
                                 <div className="li-review-product-desc">
                                   <p className="li-product-name">
-                                    Today is a good day Framed poster
+                                    {product.name_product}
                                   </p>
                                   <p>
-                                    <span>
-                                      Beach Camera Exclusive Bundle - Includes
-                                      Two Samsung Radiant 360 R3 Wi-Fi Bluetooth
-                                      Speakers. Fill The Entire Room With
-                                      Exquisite Sound via Ring Radiator
-                                      Technology. Stream And Control R3 Speakers
-                                      Wirelessly With Your Smartphone.
-                                      Sophisticated, Modern Design{" "}
-                                    </span>
+                                    <span>{product.describe}</span>
                                   </p>
                                 </div>
                               </div>

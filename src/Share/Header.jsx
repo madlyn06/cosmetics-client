@@ -130,6 +130,7 @@ function Header(props) {
 
   const [male, set_male] = useState([]);
   const [female, set_female] = useState([]);
+  const [lamsach, set_lamsach] = useState([]);
 
   // Gọi API theo phương thức GET để load category
   useEffect(() => {
@@ -155,6 +156,17 @@ function Header(props) {
       const response_female = await Product.Get_Category_Gender(query_female);
 
       set_female(response_female);
+
+      // gender = lam sach
+      const params_lamsach = {
+        gender: "3"
+      };
+
+      const query_lamsach = "?" + queryString.stringify(params_lamsach);
+
+      const response_lamsach = await Product.Get_Category_Gender(query_lamsach);
+
+      set_lamsach(response_lamsach);
     };
 
     fetchData();
@@ -429,7 +441,10 @@ function Header(props) {
                         <Link to="/shop/all">Menu</Link>
                         <ul class="megamenu hb-megamenu">
                           <li>
-                            <Link to="/shop/all">Male</Link>
+                            <Link to="/shop/all">Tất cả</Link>
+                          </li>
+                          <li>
+                            <Link to="#">Dưỡng da</Link>
                             <ul>
                               {male &&
                                 male.map((value) => (
@@ -445,10 +460,26 @@ function Header(props) {
                             </ul>
                           </li>
                           <li>
-                            <Link to="/shop">Female</Link>
+                            <Link to="#">Trang điểm mắt môi</Link>
                             <ul>
                               {female &&
                                 female.map((value) => (
+                                  <li key={value._id}>
+                                    <Link
+                                      to={`/shop/${value._id}`}
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      {value.category}
+                                    </Link>
+                                  </li>
+                                ))}
+                            </ul>
+                          </li>
+                          <li>
+                            <Link to="#">Làm sạch</Link>
+                            <ul>
+                              {lamsach &&
+                                lamsach.map((value) => (
                                   <li key={value._id}>
                                     <Link
                                       to={`/shop/${value._id}`}

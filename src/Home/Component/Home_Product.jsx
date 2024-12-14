@@ -20,7 +20,7 @@ Home_Product.defaultProps = {
 };
 
 function Home_Product(props) {
-  const { gender, category, GET_id_modal } = props;
+  const { gender, category, GET_id_modal, name } = props;
 
   var settings = {
     dots: false,
@@ -58,7 +58,6 @@ function Home_Product(props) {
   };
 
   const [products, set_products] = useState([]);
-  console.log(products, "products");
   // Hàm này dùng gọi API trả lại dữ liệu product category
   useEffect(() => {
     const fetchData = async () => {
@@ -68,9 +67,9 @@ function Home_Product(props) {
 
       const query = "?" + queryString.stringify(params);
 
-      const response = await Product.Get_Category_Product(query);
+      const response = await Product.Get_All_Product();
 
-      set_products(response.splice(0, 7));
+      set_products(response);
     };
 
     fetchData();
@@ -84,7 +83,7 @@ function Home_Product(props) {
           <div className="col-lg-12">
             <div className="li-section-title">
               <h2>
-                <span>{gender}</span>
+                <span>{name}</span>
               </h2>
             </div>
             <Slider {...settings}>
