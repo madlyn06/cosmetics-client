@@ -136,7 +136,7 @@ function Header(props) {
     const fetchData = async () => {
       // gender = male
       const params_male = {
-        gender: "male"
+        gender: "1"
       };
 
       const query_male = "?" + queryString.stringify(params_male);
@@ -147,7 +147,7 @@ function Header(props) {
 
       // gender = female
       const params_female = {
-        gender: "female"
+        gender: "2"
       };
 
       const query_female = "?" + queryString.stringify(params_female);

@@ -110,9 +110,9 @@ function Home_Product(props) {
                         <div className="product_desc_info">
                           <div className="product-review">
                             <h5 className="manufacturer">
-                              <a href="shop-left-sidebar.html">
+                              <div style={{ cursor: "pointer" }}>
                                 {value.name_product}
-                              </a>
+                              </div>
                             </h5>
                             <div className="rating-box">
                               <ul className="rating">

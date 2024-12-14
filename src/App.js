@@ -146,7 +146,6 @@ function App() {
             <Route exact path="/event" component={Event} />
             <Route path="/event/:id" component={DetailEvent} />
 
-
             <Route path="/contact" component={Contact} />
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />

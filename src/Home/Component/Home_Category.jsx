@@ -106,9 +106,7 @@ function Home_Category(props) {
                     <div className="product_desc_info">
                       <div className="product-review">
                         <h5 className="manufacturer">
-                          <a href="shop-left-sidebar.html">
-                            {value?.id_product?.name_product}
-                          </a>
+                          <a href="#">{value?.id_product?.name_product}</a>
                         </h5>
                         <div className="rating-box">
                           <ul className="rating">
