@@ -77,7 +77,7 @@ function Home_Category(props) {
               <ul className="nav li-product-menu">
                 <li>
                   <a className="active" data-toggle="tab" href="#">
-                    <span>Sale</span>
+                    <span>Sản phẩm đang giảm giá</span>
                   </a>
                 </li>
               </ul>

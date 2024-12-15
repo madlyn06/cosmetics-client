@@ -221,12 +221,7 @@ function Home(props) {
                       </div>
                       <div className="product-desc">
                         <p>
-                          <span>
-                            {product_detail.describe} Veritatis reiciendis hic
-                            voluptatibus aperiam culpa ullam dolor esse error
-                            ducimus itaque ipsa facilis saepe rem veniam
-                            exercitationem quos magnam, odit perspiciatis.
-                          </span>
+                          <span>{product_detail.describe}</span>
                         </p>
                       </div>
                       <div className="single-add-to-cart">
@@ -235,7 +230,7 @@ function Home(props) {
                           className="cart-quantity"
                         >
                           <button className="add-to-cart" type="submit">
-                            Add to cart
+                            Thêm vào giỏ hàng
                           </button>
                         </form>
                       </div>

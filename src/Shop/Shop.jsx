@@ -150,9 +150,9 @@ function Shop(props) {
           <div className="breadcrumb-content">
             <ul>
               <li>
-                <a href="index.html">Home</a>
+                <a href="index.html">Trang chủ</a>
               </li>
-              <li className="active">Shop</li>
+              <li className="active">Sản phẩm</li>
             </ul>
           </div>
         </div>
@@ -251,11 +251,11 @@ function Shop(props) {
               <div className="shop-top-bar">
                 <div className="product-select-box">
                   <div className="product-short">
-                    <p>Sort By:</p>
+                    <p>Sắp xếp theo:</p>
                     <select className="nice-select">
-                      <option value="trending">Relevance</option>
-                      <option value="rating">Price (Low &gt; High)</option>
-                      <option value="rating">Price (High &gt; Low)</option>
+                      <option value="trending">Mức độ liên quan</option>
+                      <option value="rating">Giá (Thấp &gt; Cao)</option>
+                      <option value="rating">Giá (Cao &gt; Thấp)</option>
                     </select>
                   </div>
                 </div>

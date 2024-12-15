@@ -25,9 +25,9 @@ function DetailEvent(props) {
           <div className="breadcrumb-content">
             <ul>
               <li>
-                <a href="index.html">Home</a>
+                <a href="index.html">Trang chủ</a>
               </li>
-              <li className="active">Event</li>
+              <li className="active">Sự kiện</li>
             </ul>
           </div>
         </div>

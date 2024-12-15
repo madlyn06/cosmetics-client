@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import Cart from "../API/CartAPI";
@@ -214,6 +214,22 @@ function Header(props) {
 
     window.location.replace("/search");
   };
+  const menuRef = useRef(null);
+  const cartRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        menuRef.current.classList.remove("show");
+      }
+      if (cartRef.current && !cartRef.current.contains(event.target)) {
+        cartRef.current.classList.remove("show");
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
 
   return (
     <header>
@@ -222,8 +238,8 @@ function Header(props) {
           <div className="row">
             <div className="col-lg-3 col-md-4">
               <li>
-                <span>Telephone Enquiry:</span>
-                <span>(+123) 123 321 345</span>
+                <span>Liên hệ: </span>
+                <span>(+84) 123 321 345</span>
               </li>
             </div>
             <div className="col-lg-9 col-md-8">
@@ -246,33 +262,41 @@ function Header(props) {
                         aria-expanded="false"
                         aria-controls="collapseExample"
                       >
-                        Setting
+                        Cài đặt
                       </span>
                     )}
                   </div>
                   <div className="ul_setting">
                     {active_user ? (
-                      <ul className="setting_ul collapse" id="collapseExample">
+                      <ul
+                        ref={menuRef}
+                        className="setting_ul collapse"
+                        id="collapseExample"
+                      >
                         <li className="li_setting">
                           <Link
                             to={`/profile/${sessionStorage.getItem("id_user")}`}
                           >
-                            Profile
+                            Trang cá nhân
                           </Link>
                         </li>
                         <li className="li_setting">
-                          <Link to="/history">Order Status</Link>
+                          <Link to="/history">Trạng thái đơn hàng</Link>
                         </li>
                         <li className="li_setting">
                           <a onClick={handler_logout} href="#">
-                            Log Out
+                            Đăng xuất
                           </a>
                         </li>
                       </ul>
                     ) : (
-                      <ul className="setting_ul collapse" id="collapseExample">
+                      <ul
+                        ref={menuRef}
+                        className="setting_ul collapse"
+                        id="collapseExample"
+                      >
                         <li className="li_setting" style={{ color: "black" }}>
-                          <Link to="/signin">Sign In</Link>
+                          <Link to="/signin">Đăng nhập</Link>
                         </li>
                       </ul>
                     )}
@@ -301,7 +325,7 @@ function Header(props) {
               >
                 <input
                   type="text"
-                  placeholder="Enter your search key ..."
+                  placeholder="Nhập tên sản phẩm ..."
                   value={keyword_search}
                   onChange={(e) => set_keyword_search(e.target.value)}
                 />
@@ -367,7 +391,11 @@ function Header(props) {
                         </span>
                       </div>
                       <span></span>
-                      <div className="minicart collapse" id="collapse_carts">
+                      <div
+                        ref={cartRef}
+                        className="minicart collapse"
+                        id="collapse_carts"
+                      >
                         <ul className="minicart-product-list">
                           {carts_mini &&
                             carts_mini.map((value, index) => (
@@ -403,7 +431,7 @@ function Header(props) {
                             ))}
                         </ul>
                         <p className="minicart-total">
-                          SUBTOTAL:{" "}
+                          Tổng giá tiền:{" "}
                           <span>
                             {new Intl.NumberFormat("vi-VN", {
                               style: "decimal",
@@ -435,10 +463,10 @@ function Header(props) {
                   <nav>
                     <ul>
                       <li className="dropdown-holder">
-                        <Link to="/">Home</Link>
+                        <Link to="/">Trang chủ</Link>
                       </li>
                       <li className="megamenu-holder">
-                        <Link to="/shop/all">Menu</Link>
+                        <Link to="/shop/all">Sản phẩm</Link>
                         <ul class="megamenu hb-megamenu">
                           <li>
                             <Link to="/shop/all">Tất cả</Link>
@@ -494,10 +522,10 @@ function Header(props) {
                         </ul>
                       </li>
                       <li>
-                        <Link to="/event">Event</Link>
+                        <Link to="/event">Sự kiện</Link>
                       </li>
                       <li>
-                        <Link to="/contact">Contact</Link>
+                        <Link to="/contact">Liên hệ</Link>
                       </li>
                     </ul>
                   </nav>

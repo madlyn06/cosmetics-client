@@ -151,9 +151,9 @@ function Checkout(props) {
           <div className="breadcrumb-content">
             <ul>
               <li>
-                <a href="index.html">Home</a>
+                <a href="index.html">Trang chủ</a>
               </li>
-              <li className="active">Checkout</li>
+              <li className="active">Thanh toán</li>
             </ul>
           </div>
         </div>

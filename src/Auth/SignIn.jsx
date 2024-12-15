@@ -72,9 +72,9 @@ function SignIn(props) {
           <div className="breadcrumb-content">
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/">Trang chủ</Link>
               </li>
-              <li className="active">Login</li>
+              <li className="active">Đăng nhập</li>
             </ul>
           </div>
         </div>
@@ -85,37 +85,39 @@ function SignIn(props) {
             <div className="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30 mr_signin">
               <form action="#">
                 <div className="login-form">
-                  <h4 className="login-title">Login</h4>
+                  <h4 className="login-title">Đăng nhập</h4>
                   <div className="row">
                     <div className="col-md-12 col-12 mb-20">
-                      <label>Username *</label>
+                      <label>Tên tài khoản *</label>
                       <input
                         className="mb-0"
                         type="text"
-                        placeholder="Username"
+                        placeholder="Tên đăng nhập"
                         value={username}
                         onChange={(e) => set_username(e.target.value)}
                       />
                       {error_username && (
-                        <span style={{ color: "red" }}>* Wrong Username!</span>
+                        <span style={{ color: "red" }}>
+                          *Sai tên tài khoản!
+                        </span>
                       )}
                     </div>
                     <div className="col-12 mb-20">
-                      <label>Password</label>
+                      <label>Mật khẩu</label>
                       <input
                         className="mb-0"
                         type="password"
-                        placeholder="Password"
+                        placeholder="Mật khẩu"
                         value={password}
                         onChange={(e) => set_password(e.target.value)}
                       />
                       {error_password && (
-                        <span style={{ color: "red" }}>* Wrong Password!</span>
+                        <span style={{ color: "red" }}>*Sai mật khẩu!</span>
                       )}
                     </div>
                     <div className="col-md-8">
                       <div className="check-box d-inline-block mb-2 ml-0 ml-md-2 mt-6">
-                        <Link to="/signup">Do You Have Account?</Link>
+                        <Link to="/signup">Bạn chưa có tài khoản?</Link>
                       </div>
                     </div>
 
@@ -126,7 +128,7 @@ function SignIn(props) {
                         style={{ cursor: "pointer" }}
                         onClick={handler_signin}
                       >
-                        Login
+                        Đăng nhập
                       </button>
                     </div>
                   </div>

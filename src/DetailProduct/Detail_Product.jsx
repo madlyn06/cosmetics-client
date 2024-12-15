@@ -207,9 +207,9 @@ function Detail_Product(props) {
           <div className="breadcrumb-content">
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/">Trang chủ</Link>
               </li>
-              <li className="active">Detail</li>
+              <li className="active">Chi tiết</li>
             </ul>
           </div>
         </div>
@@ -274,7 +274,7 @@ function Detail_Product(props) {
                   <div className="single-add-to-cart">
                     <form action="#" className="cart-quantity">
                       <div className="quantity">
-                        <label>Quantity</label>
+                        <label>Số lượng</label>
                         <div className="cart-plus-minus">
                           <input
                             className="cart-plus-minus-box"
@@ -296,7 +296,7 @@ function Detail_Product(props) {
                         type="submit"
                         onClick={handler_addcart}
                       >
-                        Add to cart
+                        Thêm vào giỏ hàng
                       </a>
                     </form>
                   </div>
@@ -315,12 +315,12 @@ function Detail_Product(props) {
                 <ul className="nav li-product-menu">
                   <li>
                     <a className="active" data-toggle="tab" href="#description">
-                      <span>Description</span>
+                      <span>Mô tả sản phẩm</span>
                     </a>
                   </li>
                   <li>
                     <a data-toggle="tab" href="#reviews">
-                      <span>Reviews</span>
+                      <span>Đánh giá</span>
                     </a>
                   </li>
                 </ul>
