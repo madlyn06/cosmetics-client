@@ -2,7 +2,7 @@ import axios from "axios";
 import queryString from "query-string";
 
 // http://localhost:8000
-const env = "dev";
+const env = "prod";
 const baseURL =
   env === "dev" ? "http://localhost:8000" : "https://cosmetics-be.onrender.com";
 const axiosClient = axios.create({
