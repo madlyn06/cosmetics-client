@@ -8,13 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 import NoteAPI from "../API/NoteAPI";
 import Detail_OrderAPI from "../API/Detail_OrderAPI";
 import CouponAPI from "../API/CouponAPI";
+import { Controller, useForm } from "react-hook-form";
 
 const VND = new Intl.NumberFormat("vi-VN", {
   style: "currency",
   currency: "VND"
 });
 
-const socket = io("http://localhost:8000/", {
+const socket = io("https://cosmetics-be.onrender.com/", {
   transports: ["websocket"],
   jsonp: false
 });
@@ -24,9 +25,7 @@ Checkout.propTypes = {};
 
 function Checkout(props) {
   const [total_price, set_total_price] = useState(0);
-  const [methodCheckout, setMethodCheckout] = useState(
-    "Phương thức thanh toán"
-  );
+  const [show_success, set_success] = useState(false);
 
   useEffect(() => {
     const carts = JSON.parse(localStorage.getItem("carts"));
@@ -58,19 +57,18 @@ function Checkout(props) {
     }
   }
 
-  const [information, set_information] = useState({
-    fullname: "",
-    phone: "",
-    address: "",
-    email: ""
-  });
+  const form = useForm();
+  const { register, handleSubmit } = form;
 
   const count_change = useSelector((state) => state.Count.isLoad);
 
   const dispatch = useDispatch();
 
   // Hàm này dùng để thanh toán offline
-  const handler_Checkout = async () => {
+  const onSubmit = async (data) => {
+    if (VND.format(total_price) === 0) {
+      return;
+    }
     if (localStorage.getItem("id_coupon")) {
       await CouponAPI.updateCoupon(localStorage.getItem("id_coupon"));
     }
@@ -78,8 +76,8 @@ function Checkout(props) {
     // data Delivery
     const data_delivery = {
       // id_delivery:  Math.random.toString(),
-      fullname: information.fullname,
-      phone: information.phone
+      fullname: data.fullname,
+      phone: data.phone
     };
 
     // Xứ lý API Delivery
@@ -88,7 +86,7 @@ function Checkout(props) {
     // data Order
     const data_order = {
       id_user: sessionStorage.getItem("id_user"),
-      address: information.address,
+      address: data.address,
       total: total_price,
       status: "1",
       pay: false,
@@ -122,7 +120,6 @@ function Checkout(props) {
 
       await Detail_OrderAPI.post_detail_order(data_detail_order);
     }
-
     // Gửi socket lên server
     socket.emit("send_order", "Có người vừa đặt hàng");
     // Xử lý API Send Mail
@@ -140,12 +137,32 @@ function Checkout(props) {
     // Hàm này dùng để load lại phần header bằng Redux
     const action_count_change = changeCount(count_change);
     dispatch(action_count_change);
+    set_success(true);
+    setTimeout(() => {
+      set_success(false);
+    }, 1000);
+
+    window.location.replace("/");
   };
 
   // Kiểm tra xem khách hàng đã nhập chỉ nhận hàng hay chưa
-
   return (
     <div>
+      {show_success && (
+        <div className="modal_success">
+          <div className="group_model_success pt-3">
+            <div className="text-center p-2">
+              <i
+                className="fa fa-bell fix_icon_bell"
+                style={{ fontSize: "40px", color: "#fff" }}
+              ></i>
+            </div>
+            <h4 className="text-center p-3" style={{ color: "#fff" }}>
+              Bạn Đã Thêm Hàng Thành Công!
+            </h4>
+          </div>
+        </div>
+      )}
       <div className="breadcrumb-area">
         <div className="container">
           <div className="breadcrumb-content">
@@ -159,98 +176,75 @@ function Checkout(props) {
         </div>
         <div className="wrapper">
           <div className="container">
-            <form action className="mt-10">
+            <form
+              onSubmit={handleSubmit(onSubmit, (err) => console.log(err))}
+              className="mt-10"
+            >
               <div className="name">
                 <div>
                   <label htmlFor="f-name">Tên đầy đủ</label>
                   <input
-                    onChange={(e) =>
-                      set_information({
-                        ...information,
-                        fullname: e.target.value
-                      })
-                    }
-                    type="text"
-                    name="f-name"
-                    className="form-control"
+                    name="fullname"
+                    ref={register({ required: "Vui lòng nhập tên đầy đủ" })}
                   />
+                  {form.errors.fullname && (
+                    <p className="text-danger">
+                      {form.errors.fullname.message}
+                    </p>
+                  )}
                 </div>
+
                 <div>
                   <label htmlFor="l-name">Địa chỉ</label>
                   <input
-                    onChange={(e) =>
-                      set_information({
-                        ...information,
-                        address: e.target.value
-                      })
-                    }
+                    name="address"
+                    ref={register({ required: "Vui lòng nhập địa chỉ đầy đủ" })}
                     type="text"
-                    name="l-name"
                     className="form-control"
                   />
+                  {form.errors.address && (
+                    <p className="text-danger">{form.errors.address.message}</p>
+                  )}
                 </div>
               </div>
               <div className="street">
                 <label htmlFor="name">Số điện thoại</label>
                 <input
                   type="text"
-                  onChange={(e) =>
-                    set_information({ ...information, phone: e.target.value })
-                  }
-                  name="address"
+                  name="phone"
+                  ref={register({
+                    required: "Vui lòng nhập số điện thoại đầy đủ"
+                  })}
                   className="form-control"
                 />
+                {form.errors.phone && (
+                  <p className="text-danger">{form.errors.phone.message}</p>
+                )}
               </div>
               <div className="address-info">
                 <div>
                   <label htmlFor="city">Email</label>
                   <input
                     type="text"
-                    onChange={(e) =>
-                      set_information({ ...information, email: e.target.value })
-                    }
-                    name="city"
+                    name="email"
+                    ref={register({
+                      required: "Vui lòng nhập email đầy đủ"
+                    })}
                     className="form-control"
                   />
+                  {form.errors.email && (
+                    <p className="text-danger">{form.errors.email.message}</p>
+                  )}
                 </div>
               </div>
               <div>Tổng giá tiền : {VND.format(total_price)}</div>
-              <div className="dropdown">
-                <button
-                  className="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  {methodCheckout}
-                </button>
-                <div
-                  className="dropdown-menu"
-                  aria-labelledby="dropdownMenuButton"
-                >
-                  <div
-                    style={{
-                      cursor: "pointer"
-                    }}
-                    className="dropdown-item"
-                    onClick={() =>
-                      setMethodCheckout("Thanh toán khi nhận hàng")
-                    }
-                  >
-                    Thanh toán khi nhận hàng
-                  </div>
-                </div>
+              <div className="mt-2">
+                Phương thức thanh toán: Thanh toán khi nhận hàng
               </div>
 
               <div className="btns mt-10">
-                <button
-                  className="btn btn-primary"
-                  type="button"
-                  onClick={handler_Checkout}
-                >
-                  Purchase
+                <button className="btn btn-primary" type="submit">
+                  Thanh toán
                 </button>
               </div>
             </form>

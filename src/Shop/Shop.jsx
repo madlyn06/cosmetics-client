@@ -102,6 +102,7 @@ function Shop(props) {
 
   const [male, set_male] = useState([]);
   const [female, set_female] = useState([]);
+  const [unisex, set_unisex] = useState([]);
 
   // Gọi API theo phương thức GET để load category
   useEffect(() => {
@@ -127,6 +128,17 @@ function Shop(props) {
       const response_female = await Product.Get_Category_Gender(query_female);
 
       set_female(response_female);
+
+      // gender = unisex
+      const params_unisex = {
+        gender: "3"
+      };
+
+      const query_unisex = "?" + queryString.stringify(params_unisex);
+
+      const response_unisex = await Product.Get_Category_Gender(query_unisex);
+
+      set_unisex(response_unisex);
     };
 
     fetchData();
@@ -228,8 +240,8 @@ function Shop(props) {
                 <div className="li-blog-sidebar">
                   <h4 className="li-blog-sidebar-title">Làm sạch</h4>
                   <ul className="li-blog-archive">
-                    {female &&
-                      female.map((value) => (
+                    {unisex &&
+                      unisex.map((value) => (
                         <li key={value._id}>
                           <Link
                             to={`/shop/${value._id}`}

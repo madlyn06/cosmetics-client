@@ -10,7 +10,7 @@ import NoteAPI from "../API/NoteAPI";
 import Detail_OrderAPI from "../API/Detail_OrderAPI";
 import CouponAPI from "../API/CouponAPI";
 
-const socket = io("http://localhost:8000/", {
+const socket = io("https://cosmetics-be.onrender.com/", {
   transports: ["websocket"],
   jsonp: false
 });

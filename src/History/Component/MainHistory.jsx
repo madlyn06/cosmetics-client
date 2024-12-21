@@ -96,14 +96,14 @@ function MainHistory(props) {
                   <table className="table">
                     <thead>
                       <tr>
-                        <th className="li-product-remove">ID Invoice</th>
-                        <th className="li-product-thumbnail">Name</th>
-                        <th className="cart-product-name">Phone</th>
-                        <th className="li-product-price">Address</th>
-                        <th className="li-product-quantity">Total</th>
-                        <th className="li-product-subtotal">Payment</th>
-                        <th className="li-product-subtotal">Status</th>
-                        <th className="li-product-subtotal">Cancel</th>
+                        <th className="li-product-remove">ID Đơn hàng</th>
+                        <th className="li-product-thumbnail">Tên sản phẩm</th>
+                        <th className="cart-product-name">Số điện thoại</th>
+                        <th className="li-product-price">Địa chỉ</th>
+                        <th className="li-product-quantity">Giá tiền</th>
+                        <th className="li-product-subtotal">Thanh toán</th>
+                        <th className="li-product-subtotal">Trạng thái</th>
+                        <th className="li-product-subtotal"></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -112,7 +112,9 @@ function MainHistory(props) {
                           <tr key={value._id}>
                             <td className="li-product-price">
                               <span className="amount">
-                                <Link to={`/history/${value._id}`}>View</Link>
+                                <Link to={`/history/${value._id}`}>
+                                  Xem chi tiết
+                                </Link>
                               </span>
                             </td>
                             <td className="li-product-price">

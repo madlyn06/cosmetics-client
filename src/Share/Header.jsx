@@ -444,7 +444,7 @@ function Header(props) {
                             to="/cart"
                             className="li-button li-button-fullwidth li-button-dark"
                           >
-                            <span>View Full Cart</span>
+                            <span>Giỏ hàng</span>
                           </Link>
                         </div>
                       </div>
@@ -467,7 +467,7 @@ function Header(props) {
                       </li>
                       <li className="megamenu-holder">
                         <Link to="/shop/all">Sản phẩm</Link>
-                        <ul class="megamenu hb-megamenu">
+                        <ul className="megamenu hb-megamenu">
                           <li>
                             <Link to="/shop/all">Tất cả</Link>
                           </li>
