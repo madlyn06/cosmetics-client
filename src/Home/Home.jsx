@@ -105,7 +105,7 @@ function Home(props) {
               <div className="single-banner">
                 <a href="#">
                   <img
-                    src="https://image.freepik.com/free-vector/fashion-banner-design-with-shirt-bag-camera-case_83728-1865.jpg"
+                    src="https://product.hstatic.net/1000006063/product/w_-_thumb_-_1200x1200px_240f3d34e95f4a7382e1cdca31f8cea6_1024x1024.png"
                     alt="Li's Static Banner"
                   />
                 </a>
@@ -115,7 +115,7 @@ function Home(props) {
               <div className="single-banner">
                 <a href="#">
                   <img
-                    src="https://image.freepik.com/free-vector/fashion-sale-banner-collection_23-2148161688.jpg"
+                    src="https://product.hstatic.net/1000006063/product/3_copy_78f267cef9fe45f9a3b6222ad4842a33_grande.png"
                     alt="Li's Static Banner"
                   />
                 </a>
@@ -125,7 +125,7 @@ function Home(props) {
               <div className="single-banner">
                 <a href="#">
                   <img
-                    src="https://image.freepik.com/free-vector/fashion-sale-banners_52683-11557.jpg"
+                    src="https://product.hstatic.net/1000006063/product/1200_x_1200_0e7eb68fd1c141819de226b02ba5ef42_grande.png"
                     alt="Li's Static Banner"
                   />
                 </a>

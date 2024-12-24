@@ -33,16 +33,16 @@ function Contact(props) {
           <div className="row">
             <div className="col-lg-5 offset-lg-1 col-md-12 order-1 order-lg-2">
               <div className="contact-page-side-content">
-                <h3 className="contact-page-title">Contact Us</h3>
+                <h3 className="contact-page-title">Liên hệ với chúng tôi</h3>
                 <p className="contact-page-message mb-25">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Quidem sapiente ab cum accusantium, incidunt nihil fugit
-                  similique? Reiciendis ex dignissimos libero iusto quos,
-                  consequuntur nobis tenetur a minima! Voluptatum, ab?
+                  Thành lập năm 2012, nhiều năm qua đã khẳng định chất lượng, uy
+                  tín với khách hàng. Chúng tôi chuyên cung cấp mỹ phẩm hàn quốc
+                  The Face Shop chính hãng. Tư vấn nhiệt tình, giao hàng siêu
+                  tốc và thu tiền tận nơi trên toàn quốc.
                 </p>
                 <div className="single-contact-block">
                   <h4>
-                    <i className="fa fa-fax"></i> Address
+                    <i className="fa fa-fax"></i> Địa chỉ
                   </h4>
                   <p>
                     155 Sư Vạn Hạnh, Phường 12, Quận 10, Thành phố Hồ Chí Minh
@@ -50,7 +50,7 @@ function Contact(props) {
                 </div>
                 <div className="single-contact-block">
                   <h4>
-                    <i className="fa fa-phone"></i> Phone
+                    <i className="fa fa-phone"></i> Số điện thoại
                   </h4>
                   <p>Mobile: 0763557366</p>
                   <p>Hotline: 1900100 Biết</p>
@@ -59,8 +59,7 @@ function Contact(props) {
                   <h4>
                     <i className="fa fa-envelope-o"></i> Email
                   </h4>
-                  <p>tienkim9920@gmail.com</p>
-                  <p>hahadaubo@gmail.com</p>
+                  <p>hongnmp@gmail.com</p>
                 </div>
               </div>
             </div>

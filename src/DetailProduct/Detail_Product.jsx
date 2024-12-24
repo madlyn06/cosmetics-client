@@ -400,7 +400,7 @@ function Detail_Product(props) {
                       style={{ cursor: "pointer", color: "#fff" }}
                       onClick={() => set_modal(true)}
                     >
-                      Write Your Review!
+                      Đánh giá sản phẩm!
                     </a>
                   </div>
                   <Modal
@@ -414,9 +414,7 @@ function Detail_Product(props) {
                     >
                       <div className="modal-content">
                         <div className="modal-body">
-                          <h3 className="review-page-title">
-                            Write Your Review
-                          </h3>
+                          <h3 className="review-page-title">Đánh giá</h3>
                           <div className="modal-inner-area row">
                             <div className="col-lg-6">
                               <div className="li-review-product">
@@ -439,12 +437,10 @@ function Detail_Product(props) {
                               <div className="li-review-content">
                                 <div className="feedback-area">
                                   <div className="feedback">
-                                    <h3 className="feedback-title">
-                                      Our Feedback
-                                    </h3>
+                                    <h3 className="feedback-title">Phản hồi</h3>
                                     <form action="#">
                                       <p className="your-opinion">
-                                        <label>Your Rating</label>
+                                        <label>Số điểm</label>
                                         <span>
                                           <select
                                             className="star-rating"
@@ -462,7 +458,7 @@ function Detail_Product(props) {
                                       </p>
                                       <p className="feedback-form">
                                         <label htmlFor="feedback">
-                                          Your Review
+                                          Bình luận
                                         </label>
                                         <textarea
                                           id="feedback"
@@ -486,13 +482,13 @@ function Detail_Product(props) {
                                             className="close"
                                             onClick={() => set_modal(false)}
                                           >
-                                            Close
+                                            Hủy
                                           </a>
                                           <a
                                             style={{ cursor: "pointer" }}
                                             onClick={handler_Comment}
                                           >
-                                            Submit
+                                            Đánh giá
                                           </a>
                                         </div>
                                       </div>
