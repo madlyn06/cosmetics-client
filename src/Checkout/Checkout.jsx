@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import NoteAPI from "../API/NoteAPI";
 import Detail_OrderAPI from "../API/Detail_OrderAPI";
 import CouponAPI from "../API/CouponAPI";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const VND = new Intl.NumberFormat("vi-VN", {
   style: "currency",
@@ -58,7 +58,11 @@ function Checkout(props) {
   }
 
   const form = useForm();
-  const { register, handleSubmit } = form;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = form;
 
   const count_change = useSelector((state) => state.Count.isLoad);
 
@@ -144,7 +148,6 @@ function Checkout(props) {
 
     window.location.replace("/");
   };
-
   // Kiểm tra xem khách hàng đã nhập chỉ nhận hàng hay chưa
   return (
     <div>
@@ -176,21 +179,18 @@ function Checkout(props) {
         </div>
         <div className="wrapper">
           <div className="container">
-            <form
-              onSubmit={handleSubmit(onSubmit, (err) => console.log(err))}
-              className="mt-10"
-            >
+            <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
               <div className="name">
                 <div>
                   <label htmlFor="f-name">Tên đầy đủ</label>
                   <input
                     name="fullname"
-                    ref={register({ required: "Vui lòng nhập tên đầy đủ" })}
+                    {...register("fullname", {
+                      required: "Vui lòng nhập tên đầy đủ"
+                    })}
                   />
-                  {form.errors.fullname && (
-                    <p className="text-danger">
-                      {form.errors.fullname.message}
-                    </p>
+                  {errors.fullname && (
+                    <p className="text-danger">{errors.fullname.message}</p>
                   )}
                 </div>
 
@@ -198,12 +198,14 @@ function Checkout(props) {
                   <label htmlFor="l-name">Địa chỉ</label>
                   <input
                     name="address"
-                    ref={register({ required: "Vui lòng nhập địa chỉ đầy đủ" })}
+                    {...register("address", {
+                      required: "Vui lòng nhập địa chỉ đầy đủ"
+                    })}
                     type="text"
                     className="form-control"
                   />
-                  {form.errors.address && (
-                    <p className="text-danger">{form.errors.address.message}</p>
+                  {errors.address && (
+                    <p className="text-danger">{errors.address.message}</p>
                   )}
                 </div>
               </div>
@@ -212,13 +214,13 @@ function Checkout(props) {
                 <input
                   type="text"
                   name="phone"
-                  ref={register({
+                  {...register("phone", {
                     required: "Vui lòng nhập số điện thoại đầy đủ"
                   })}
                   className="form-control"
                 />
-                {form.errors.phone && (
-                  <p className="text-danger">{form.errors.phone.message}</p>
+                {errors.phone && (
+                  <p className="text-danger">{errors.phone.message}</p>
                 )}
               </div>
               <div className="address-info">
@@ -227,13 +229,13 @@ function Checkout(props) {
                   <input
                     type="text"
                     name="email"
-                    ref={register({
+                    {...register("email", {
                       required: "Vui lòng nhập email đầy đủ"
                     })}
                     className="form-control"
                   />
-                  {form.errors.email && (
-                    <p className="text-danger">{form.errors.email.message}</p>
+                  {errors.email && (
+                    <p className="text-danger">{errors.email.message}</p>
                   )}
                 </div>
               </div>
