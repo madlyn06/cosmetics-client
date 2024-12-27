@@ -148,20 +148,22 @@ function MainHistory(props) {
                                     : { color: "red" }
                                 }
                               >
-                                {value.pay ? "Paid" : "Unpaid"}
+                                {value.pay
+                                  ? "Đã thanh toán"
+                                  : "Chưa thanh toán"}
                               </span>
                             </td>
                             <td className="li-product-price">
                               <span className="amount">
                                 {value.status === "1"
-                                  ? "Processing"
+                                  ? "Đang xử lý"
                                   : value.status === "2"
-                                  ? "Confirmed"
+                                  ? "Đã xác nhận"
                                   : value.status === "3"
-                                  ? "Shipping"
+                                  ? "Đang giao hàng"
                                   : value.status === "4"
-                                  ? "Finished"
-                                  : "Canceled"}
+                                  ? "Đã giao hàng"
+                                  : "Đã hủy"}
                               </span>
                             </td>
                             <td className="li-product-price">
@@ -208,7 +210,7 @@ function MainHistory(props) {
                                   default:
                                     return (
                                       <span className="text-danger">
-                                        Cancelled
+                                        Đã hủy
                                       </span>
                                     );
                                 }

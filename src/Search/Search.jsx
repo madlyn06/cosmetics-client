@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -5,15 +6,20 @@ import queryString from "query-string";
 import Product from "../API/Product";
 import "./Search.css";
 import { Link } from "react-router-dom";
+import CartsLocal from "../Share/CartsLocal";
+import { changeCount } from "../Redux/Action/ActionCount";
+import { useDispatch, useSelector } from "react-redux";
 
 Search.propTypes = {};
 
 function Search(props) {
   const [products, set_products] = useState([]);
   const [page, set_page] = useState(1);
-
+  const [show_success, set_show_success] = useState(false);
+  const [amount, setAmount] = useState(1);
   const [show_load, set_show_load] = useState(true);
-
+  const count_change = useSelector((state) => state.Count.isLoad);
+  const dispatch = useDispatch();
   useEffect(() => {
     setTimeout(() => {
       const fetchData = async () => {
@@ -40,21 +46,24 @@ function Search(props) {
 
   return (
     <div className="content-wraper pt-60 pb-60">
+      {show_success && (
+        <div className="modal_success">
+          <div className="group_model_success pt-3">
+            <div className="text-center p-2">
+              <i
+                className="fa fa-bell fix_icon_bell"
+                style={{ fontSize: "40px", color: "#fff" }}
+              ></i>
+            </div>
+            <h4 className="text-center p-3" style={{ color: "#fff" }}>
+              Không đủ số lượng sản phẩm!
+            </h4>
+          </div>
+        </div>
+      )}
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
-            <div className="shop-top-bar">
-              <div className="product-select-box">
-                <div className="product-short">
-                  <p>Tìm kiếm theo:</p>
-                  <select className="nice-select">
-                    <option value="trending">Mức độ liên quan</option>
-                    <option value="rating">Giá (Thấp &gt; Cao)</option>
-                    <option value="rating">Giá (Cao &gt; Thấp)</option>
-                  </select>
-                </div>
-              </div>
-            </div>
             <div className="shop-products-wrapper">
               <div className="row">
                 <div className="col">
@@ -144,13 +153,7 @@ function Search(props) {
                                     {value.price_product}₫
                                   </span>
                                 </div>
-                                <p>
-                                  Lorem ipsum dolor sit amet consectetur
-                                  adipisicing elit. Facere assumenda ea quia
-                                  magnam, aspernatur earum quidem eum et illum
-                                  dolorem commodi sunt delectus totam blanditiis
-                                  doloremque at voluptates nisi iusto!
-                                </p>
+                                <p>{value.describe}</p>
                               </div>
                             </div>
                           </div>
@@ -158,12 +161,27 @@ function Search(props) {
                             <div className="shop-add-action mb-xs-30">
                               <ul className="add-actions-link">
                                 <li className="add-cart">
-                                  <a href="#">Add to cart</a>
-                                </li>
-                                <li className="wishlist">
-                                  <a href="wishlist.html">
-                                    <i className="fa fa-heart-o" />
-                                    Add to wishlist
+                                  <a
+                                    href="#"
+                                    onClick={() => {
+                                      const data = {
+                                        id_cart: Math.random().toString(),
+                                        id_product: value._id,
+                                        name_product: value.name_product,
+                                        price_product: value.price_product,
+                                        count: 1,
+                                        image: value.image,
+                                        size: "S"
+                                      };
+
+                                      CartsLocal.addProduct(data);
+
+                                      const action_count_change =
+                                        changeCount(count_change);
+                                      dispatch(action_count_change);
+                                    }}
+                                  >
+                                    Thêm vào giỏ hàng
                                   </a>
                                 </li>
                                 <li>
@@ -174,7 +192,7 @@ function Search(props) {
                                     href="#"
                                   >
                                     <i className="fa fa-eye" />
-                                    Quick view
+                                    Xem chi tiết
                                   </a>
                                 </li>
                               </ul>
@@ -246,41 +264,74 @@ function Search(props) {
                             </div>
                             <div className="price-box pt-20">
                               <span className="new-price new-price-2">
-                                ${value.price_product}
+                                {value.price_product}₫
                               </span>
                             </div>
                             <div className="product-desc">
                               <p>
-                                <span>
-                                  Lorem ipsum dolor sit amet consectetur
-                                  adipisicing elit. Veritatis reiciendis hic
-                                  voluptatibus aperiam culpa ullam dolor esse
-                                  error ducimus itaque ipsa facilis saepe rem
-                                  veniam exercitationem quos magnam, odit
-                                  perspiciatis.
-                                </span>
+                                <span>{value.describe}</span>
                               </p>
                             </div>
                             <div className="single-add-to-cart">
                               <form action="#" className="cart-quantity">
                                 <div className="quantity">
-                                  <label>Quantity</label>
+                                  <label>Số lượng</label>
                                   <div className="cart-plus-minus">
                                     <input
                                       className="cart-plus-minus-box"
-                                      value="1"
+                                      value={amount}
                                       type="text"
                                     />
-                                    <div className="dec qtybutton">
+                                    <div
+                                      className="dec qtybutton"
+                                      onClick={() => {
+                                        if (amount <= 1) {
+                                          return;
+                                        }
+                                        setAmount(amount - 1);
+                                      }}
+                                    >
                                       <i className="fa fa-angle-down"></i>
                                     </div>
-                                    <div className="inc qtybutton">
+                                    <div
+                                      className="inc qtybutton"
+                                      onClick={() => {
+                                        setAmount(amount + 1);
+                                      }}
+                                    >
                                       <i className="fa fa-angle-up"></i>
                                     </div>
                                   </div>
                                 </div>
-                                <button className="add-to-cart" type="submit">
-                                  Add to cart
+                                <button
+                                  className="add-to-cart"
+                                  onClick={() => {
+                                    if (amount > value.amount) {
+                                      set_show_success(true);
+                                      setTimeout(() => {
+                                        set_show_success(false);
+                                      }, 1000);
+                                      return;
+                                    }
+                                    const data = {
+                                      id_cart: Math.random().toString(),
+                                      id_product: value._id,
+                                      name_product: value.name_product,
+                                      price_product: value.price_product,
+                                      count: amount,
+                                      image: value.image,
+                                      size: "S"
+                                    };
+
+                                    CartsLocal.addProduct(data);
+
+                                    const action_count_change =
+                                      changeCount(count_change);
+                                    dispatch(action_count_change);
+                                  }}
+                                  type="button"
+                                >
+                                  Thêm vào giỏ hàng
                                 </button>
                               </form>
                             </div>

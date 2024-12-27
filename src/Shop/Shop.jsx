@@ -260,18 +260,6 @@ function Shop(props) {
               </div>
             </div>
             <div className="col-lg-9 order-1 order-lg-2">
-              <div className="shop-top-bar">
-                <div className="product-select-box">
-                  <div className="product-short">
-                    <p>Sắp xếp theo:</p>
-                    <select className="nice-select">
-                      <option value="trending">Mức độ liên quan</option>
-                      <option value="rating">Giá (Thấp &gt; Cao)</option>
-                      <option value="rating">Giá (Cao &gt; Thấp)</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
               <div className="shop-products-wrapper">
                 <div className="tab-content">
                   <div

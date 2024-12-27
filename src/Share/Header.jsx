@@ -109,7 +109,7 @@ function Header(props) {
   // Hàm này là hàm con chia ra để xử lý
   function showData(carts, sum, price) {
     carts.map((value) => {
-      sum += value.count;
+      sum += +value.count;
       price += parseInt(value.price_product) * parseInt(value.count);
     });
 

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import CommentAPI from "../API/CommentAPI";
 import CartsLocal from "../Share/CartsLocal";
 import SaleAPI from "../API/SaleAPI";
+import ProductSuggest from "../Home/Component/ProductSuggest";
 
 Detail_Product.propTypes = {};
 
@@ -32,7 +33,7 @@ function Detail_Product(props) {
       const response = await Product.Get_Detail_Product(id);
 
       set_product(response);
-
+      console.log(response, "response");
       const resDetail = await SaleAPI.checkSale(id);
 
       if (resDetail.msg === "Thanh Cong") {
@@ -46,12 +47,21 @@ function Detail_Product(props) {
   const [count, set_count] = useState(1);
 
   const [show_success, set_show_success] = useState(false);
-
+  const [message, set_message] = useState("Bạn Đã Thêm Hàng Thành Công!");
   const [size, set_size] = useState("S");
 
   // Hàm này dùng để thêm vào giỏ hàng
   const handler_addcart = (e) => {
     e.preventDefault();
+
+    if (product?.amount === 0 || product?.amount < count) {
+      set_message("Số lượng hàng không đủ!");
+      set_show_success(true);
+      setTimeout(() => {
+        set_show_success(false);
+      }, 1000);
+      return;
+    }
 
     const data = {
       id_cart: Math.random().toString(),
@@ -73,6 +83,8 @@ function Detail_Product(props) {
     dispatch(action_count_change);
 
     set_show_success(true);
+
+    set_message("Bạn Đã Thêm Hàng Thành Công!");
 
     setTimeout(() => {
       set_show_success(false);
@@ -177,7 +189,7 @@ function Detail_Product(props) {
               ></i>
             </div>
             <h4 className="text-center p-3" style={{ color: "#fff" }}>
-              Bạn Đã Thêm Hàng Thành Công!
+              {message}
             </h4>
           </div>
         </div>
@@ -201,7 +213,6 @@ function Detail_Product(props) {
           </div>
         </div>
       )}
-
       <div className="breadcrumb-area">
         <div className="container">
           <div className="breadcrumb-content">
@@ -214,7 +225,6 @@ function Detail_Product(props) {
           </div>
         </div>
       </div>
-
       <div className="content-wraper">
         <div className="container">
           <div className="row single-product-area">
@@ -271,6 +281,9 @@ function Detail_Product(props) {
                       <span>{product?.describe}</span>
                     </p>
                   </div>
+                  <div>
+                    Số hàng trong kho: <span>{product?.amount || 0}</span>
+                  </div>
                   <div className="single-add-to-cart">
                     <form action="#" className="cart-quantity">
                       <div className="quantity">
@@ -306,7 +319,6 @@ function Detail_Product(props) {
           </div>
         </div>
       </div>
-
       <div className="product-area pt-35">
         <div className="container">
           <div className="row">
@@ -508,6 +520,8 @@ function Detail_Product(props) {
           </div>
         </div>
       </div>
+      {/* Sản phẩm liên quan */}
+      <ProductSuggest id_category={product.id_category} />
     </div>
   );
 }
