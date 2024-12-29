@@ -74,7 +74,7 @@ function Profile(props) {
                 }
                 style={{ fontSize: "1.1rem" }}
               >
-                Edit Profile
+                Chỉnh sửa thông tin
               </a>
             </div>
 
@@ -92,7 +92,7 @@ function Profile(props) {
                 }
                 style={{ fontSize: "1.1rem" }}
               >
-                Change Password
+                Đổi mật khẩu
               </a>
             </div>
           </div>
@@ -128,7 +128,7 @@ function Profile(props) {
                                     </div> */}
                 <div className="txt_setting_edit pt-3 pb-2">
                   <div className="d-flex justify-content-center align-items-center">
-                    <span style={{ fontWeight: "600" }}>Name</span>
+                    <span style={{ fontWeight: "600" }}>Tên đầy đủ</span>
                   </div>
                   <div>
                     <input
@@ -141,7 +141,7 @@ function Profile(props) {
                 </div>
                 <div className="txt_setting_edit pt-3 pb-2">
                   <div className="d-flex justify-content-center align-items-center">
-                    <span style={{ fontWeight: "600" }}>Username</span>
+                    <span style={{ fontWeight: "600" }}>Tên người dùng</span>
                   </div>
                   <div>
                     <input
@@ -171,7 +171,7 @@ function Profile(props) {
                     className="btn btn-secondary"
                     onClick={handler_update}
                   >
-                    Submit
+                    Xác nhận
                   </button>
                 </div>
               </div>
@@ -179,7 +179,7 @@ function Profile(props) {
               <div className="setting_change_password">
                 <div className="txt_setting_edit pt-3 pb-2">
                   <div className="d-flex justify-content-center align-items-center">
-                    <span style={{ fontWeight: "600" }}>Old Password</span>
+                    <span style={{ fontWeight: "600" }}>Mật khẩu cũ</span>
                   </div>
                   <div>
                     <input
@@ -192,7 +192,7 @@ function Profile(props) {
                 </div>
                 <div className="txt_setting_edit pt-3 pb-2">
                   <div className="d-flex justify-content-center align-items-center">
-                    <span style={{ fontWeight: "600" }}>New Password</span>
+                    <span style={{ fontWeight: "600" }}>Mật khẩu mới</span>
                   </div>
                   <div>
                     <input
@@ -206,7 +206,7 @@ function Profile(props) {
                 <div className="txt_setting_edit pt-3 pb-2">
                   <div className="d-flex justify-content-center align-items-center">
                     <span style={{ fontWeight: "600" }}>
-                      Confirm New Password
+                      Xác nhận mật khẩu mới
                     </span>
                   </div>
                   <div>
@@ -223,7 +223,7 @@ function Profile(props) {
                     className="btn btn-secondary"
                     onClick={handler_update}
                   >
-                    Change Password
+                    Xác nhận
                   </button>
                 </div>
               </div>
