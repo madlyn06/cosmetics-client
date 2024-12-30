@@ -116,7 +116,7 @@ function Search(props) {
                               <div className="product_desc_info">
                                 <div className="product-review">
                                   <h5 className="manufacturer">
-                                    <a href="product-details.html">
+                                    <a href={`/detail/${value._id}`}>
                                       {value.name_product}
                                     </a>
                                   </h5>
@@ -143,21 +143,24 @@ function Search(props) {
                                 <h4>
                                   <a
                                     className="product_name"
-                                    href="product-details.html"
+                                    href={`/detail/${value._id}`}
                                   >
                                     {value.name_product}
                                   </a>
                                 </h4>
                                 <div className="price-box">
                                   <span className="new-price">
-                                    {value.price_product}₫
+                                    {new Intl.NumberFormat("vi-VN", {
+                                      style: "decimal",
+                                      decimal: "VND"
+                                    }).format(value.price_product) + " VNĐ"}
                                   </span>
                                 </div>
                                 <p>{value.describe}</p>
                               </div>
                             </div>
                           </div>
-                          <div className="col-lg-4">
+                          {/* <div className="col-lg-4">
                             <div className="shop-add-action mb-xs-30">
                               <ul className="add-actions-link">
                                 <li className="add-cart">
@@ -197,7 +200,7 @@ function Search(props) {
                                 </li>
                               </ul>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       ))}
                   </InfiniteScroll>
@@ -264,7 +267,10 @@ function Search(props) {
                             </div>
                             <div className="price-box pt-20">
                               <span className="new-price new-price-2">
-                                {value.price_product}₫
+                                {new Intl.NumberFormat("vi-VN", {
+                                  style: "decimal",
+                                  decimal: "VND"
+                                }).format(value.price_product) + " VNĐ"}
                               </span>
                             </div>
                             <div className="product-desc">

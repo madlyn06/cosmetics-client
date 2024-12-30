@@ -53,6 +53,15 @@ function Detail_Product(props) {
   // Hàm này dùng để thêm vào giỏ hàng
   const handler_addcart = (e) => {
     e.preventDefault();
+    console.log(count);
+    if (count < 1) {
+      set_message("Số lượng hàng phải lớn hơn 0");
+      set_show_success(true);
+      setTimeout(() => {
+        set_show_success(false);
+      }, 1000);
+      return;
+    }
 
     if (product?.amount === 0 || product?.amount < count) {
       set_message("Số lượng hàng không đủ!");
@@ -95,6 +104,11 @@ function Detail_Product(props) {
   const downCount = () => {
     if (count === 1) {
       return;
+    }
+
+    if (count < 1) {
+      set_count(1);
+      return null;
     }
 
     set_count(count - 1);
@@ -292,7 +306,7 @@ function Detail_Product(props) {
                           <input
                             className="cart-plus-minus-box"
                             value={count}
-                            type="text"
+                            type="number"
                             onChange={(e) => set_count(e.target.value)}
                           />
                           <div className="dec qtybutton" onClick={downCount}>
